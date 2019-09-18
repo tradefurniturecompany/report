@@ -16,7 +16,7 @@ bin/magento setup:static-content:deploy \
 	-f en_US en_GB
 bin/magento setup:static-content:deploy \
 	--area frontend \
-	--theme Mgs/claue \
+	--theme TradeFurnitureCompany/default \
 	-f en_GB
 bin/magento maintenance:disable
 bin/magento cache:enable
@@ -39,7 +39,7 @@ bin/magento setup:static-content:deploy \
 	-f en_US en_GB
 bin/magento setup:static-content:deploy \
 	--area frontend \
-	--theme Mgs/claue \
+	--theme TradeFurnitureCompany/default \
 	-f en_GB
 bin/magento maintenance:disable
 bin/magento cache:enable
