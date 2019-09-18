@@ -1,1 +1,52 @@
-<div>TEST</div>
+<?php
+use Magento\Catalog\Model\Product as P;
+use Magento\Catalog\Model\ResourceModel\Product\Collection as C;
+use Zend_Db_Select as S;
+?>
+<table class='tfc-products'>
+<thead>
+	<tr>
+		<th class='tfc-sku'>SKU</th>
+		<th class='tfc-money'>Regular</th>
+		<th class='tfc-money'>Special</th>
+	</tr>
+</thead>
+<tbody>
+<?php
+$c = df_product_c(); /** @var C $c */
+$c->addAttributeToSelect(['price', 'special_price', 'special_from_date', 'special_to_date', 'url_key', 'url_path']);
+$c->addAttributeToFilter('status', ['eq' => 1]); // 2019-09-18 It filters out disabled products.
+// 2019-09-18 It adds out-of-stock products to the collection: https://magento.stackexchange.com/a/261620
+$c->setFlag('has_stock_status_filter', false);
+$c->setOrder('sku', S::SQL_ASC);
+//$c->setPageSize(10);
+echo df_cc_n(df_map($c, function(P $p) {
+	$rp = $p->getPrice(); /** @var float $rp */
+	if (!$rp && df_configurable($p)) {
+		$rp = min(df_map(df_configurable_children($p), function(P $p) {return $p->getPrice();}));
+	}
+	$fp = $p->getFinalPrice(); /** @var string $fp */
+	$sp = !dff_eq($rp, $fp); /** @var bool $sp */
+	return df_tag('tr', $sp ? 'tfc-sp' : '', [
+		df_tag('td', 'tfc-sku', df_tag('a', ['href' => $p->getProductUrl()], $p->getSku()))
+		,df_tag('td', 'tfc-money', dff_2($rp))
+		,df_tag('td', $sp ? 'tfc-money' : '', $sp ? dff_2($fp) : '')
+	]);
+}));
+?>
+</tbody>
+</table>
+<script>require(['jquery', 'Df_Core/thirdParty/TableSorter/main'], function($) {$(function() {
+	/**
+	 * 2017-05-13
+	 * sortList:
+	 * «An array of instructions for per-column sorting and direction
+	 * in the format: [[columnIndex, sortDirection], ... ]
+	 * where columnIndex is a zero-based index for your columns left-to-right
+	 * and sortDirection is 0 for Ascending and 1 for Descending.
+	 * A valid argument that sorts ascending first by column 1 and then column 2
+	 * looks like: [[0,0],[1,0]]»
+	 * http://tablesorter.com/docs/
+	 */
+	$('.tfc-products').tablesorter({sortList: [[0,0]]});
+});});</script>

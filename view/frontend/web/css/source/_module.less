@@ -1,2 +1,16 @@
 // 2019-09-18
-body.tfc-report-index-index main {background: yellow;}
+body.tfc-report-index-index main {
+	table.tfc-products {
+		display: block;
+		tr {
+			display: flex;
+			th {cursor: pointer;}
+			td, th {
+				display: block;
+				padding: 0.2em 0;
+				width: 6em;
+				&.tfc-money {text-align: right;}
+			}
+		}
+	}
+}

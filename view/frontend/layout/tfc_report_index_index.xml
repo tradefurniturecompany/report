@@ -1,11 +1,22 @@
 <?xml version='1.0'?>
 <page
+	layout='1column'
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_configuration.xsd'
 >
 	<body>
+<!-- 2019-09-18
+The class `tfc-report-index-index` is added automatically in Magento < 2.3,
+but in Magento 2.3 another class is added automatically instead: `tfc_report-index-index`.
+So I add the `tfc-report-index-index` class explicilty to not to break the module in future
+(after upgrading to Magento 2.3). -->
+		<attribute name='class' value='tfc-report-index-index'/>
+		<referenceContainer name='before.body.end' remove='true'/>
+		<referenceContainer name='footer-container' remove='true'/>
+		<referenceContainer name='header.container' remove='true'/>
 		<referenceContainer name='main'>
 			<block class='Magento\Framework\View\Element\Template' template='TFC_Report::index.phtml'/>
 		</referenceContainer>
+		<referenceContainer name='page.top' remove='true'/>
 	</body>	
 </page>
