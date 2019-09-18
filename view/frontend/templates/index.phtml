@@ -2,6 +2,7 @@
 use Magento\Catalog\Model\Product as P;
 use Magento\Catalog\Model\ResourceModel\Product\Collection as C;
 use Zend_Db_Select as S;
+use Magento\Catalog\Model\Product\Visibility;
 ?>
 <table class='tfc-products'>
 <thead>
@@ -16,15 +17,15 @@ use Zend_Db_Select as S;
 $c = df_product_c(); /** @var C $c */
 $c->addAttributeToSelect(['price', 'special_price', 'special_from_date', 'special_to_date', 'url_key', 'url_path']);
 $c->addAttributeToFilter('status', ['eq' => 1]); // 2019-09-18 It filters out disabled products.
+$visibility = df_o(Visibility::class); /** @var Visibility $visibility */
+$c->setVisibility( $visibility->getVisibleInSiteIds());
 // 2019-09-18 It adds out-of-stock products to the collection: https://magento.stackexchange.com/a/261620
 $c->setFlag('has_stock_status_filter', false);
 $c->setOrder('sku', S::SQL_ASC);
-//$c->setPageSize(10);
 echo df_cc_n(df_map($c, function(P $p) {
-	$rp = $p->getPrice(); /** @var float $rp */
-	if (!$rp && df_configurable($p)) {
-		$rp = min(df_map(df_configurable_children($p), function(P $p) {return $p->getPrice();}));
-	}
+	$rp = !df_configurable($p) ? $p->getPrice() :
+		min(df_map(df_configurable_children($p), function(P $p) {return $p->getPrice();}))
+	; /** @var float $rp */
 	$fp = $p->getFinalPrice(); /** @var string $fp */
 	$sp = !dff_eq($rp, $fp); /** @var bool $sp */
 	return df_tag('tr', $sp ? 'tfc-sp' : '', [
