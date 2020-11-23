@@ -14,7 +14,7 @@ use Magento\Catalog\Model\Product\Visibility;
 </thead>
 <tbody>
 <?php
-$c = df_product_c(); /** @var C $c */
+$c = df_pc(); /** @var C $c */
 $c->addAttributeToSelect(['price', 'special_price', 'special_from_date', 'special_to_date', 'url_key', 'url_path']);
 $c->addAttributeToFilter('status', ['eq' => 1]); // 2019-09-18 It filters out disabled products.
 $visibility = df_o(Visibility::class); /** @var Visibility $visibility */

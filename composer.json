@@ -1,6 +1,6 @@
 {
 	"name": "tradefurniturecompany/report"
-	,"version": "1.0.1"
+	,"version": "1.0.2"
 	,"description": "A custom report for tradefurniturecompany.co.uk (Magento 2)"
 	,"type": "magento2-module"
 	,"homepage": "https://github.com/tradefurniturecompany/report"
@@ -11,7 +11,7 @@
 		,"homepage": "https://mage2.pro/users/dmitry_fedyuk"
 		,"role": "Developer"
 	}]
-	,"require": {"mage2pro/core": ">=5.2.1"}
+	,"require": {"mage2pro/core": ">=7.0.9"}
 	,"autoload": {"files": ["registration.php"], "psr-4": {"TFC\\Report\\": ""}}
 	,"keywords": ["Magento 2"]
 }
