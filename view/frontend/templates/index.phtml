@@ -24,7 +24,7 @@ $c->setFlag('has_stock_status_filter', false);
 $c->setOrder('sku', S::SQL_ASC);
 echo df_cc_n(df_map($c, function(P $p):string {
 	$rp = !df_configurable($p) ? $p->getPrice() :
-		min(df_map(df_configurable_children($p), function(P $p) {return $p->getPrice();}))
+		min(df_map(df_configurable_children($p), function(P $p):float {return $p->getPrice();}))
 	; /** @var float $rp */
 	$fp = $p->getFinalPrice(); /** @var string $fp */
 	$sp = !dff_eq($rp, $fp); /** @var bool $sp */
