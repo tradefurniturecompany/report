@@ -1,14 +1,14 @@
 {
 	"name": "tradefurniturecompany/report"
-	,"version": "1.0.2"
+	,"version": "1.0.3"
 	,"description": "A custom report for tradefurniturecompany.co.uk (Magento 2)"
 	,"type": "magento2-module"
 	,"homepage": "https://github.com/tradefurniturecompany/report"
 	,"license": "MIT"
 	,"authors": [{
-		"name": "Dmitry Fedyuk"
+		"name": "Dmitrii Fediuk"
 		,"email": "admin@mage2.pro"
-		,"homepage": "https://mage2.pro/users/dmitry_fedyuk"
+		,"homepage": "https://www.upwork.com/fl/mage2pro"
 		,"role": "Developer"
 	}]
 	,"require": {"mage2pro/core": ">=7.0.9"}
