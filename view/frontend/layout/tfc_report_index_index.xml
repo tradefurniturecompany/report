@@ -8,8 +8,7 @@
 <!-- 2019-09-18
 The class `tfc-report-index-index` is added automatically in Magento < 2.3,
 but in Magento 2.3 another class is added automatically instead: `tfc_report-index-index`.
-So I add the `tfc-report-index-index` class explicilty to not to break the module in future
-(after upgrading to Magento 2.3). -->
+So I add the `tfc-report-index-index` class explicilty to not to break the module in future (after upgrading to Magento 2.3). -->
 		<attribute name='class' value='tfc-report-index-index'/>
 		<referenceContainer name='before.body.end' remove='true'/>
 		<referenceContainer name='footer-container' remove='true'/>
