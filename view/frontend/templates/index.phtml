@@ -22,7 +22,7 @@ $c->setVisibility( $visibility->getVisibleInSiteIds());
 // 2019-09-18 It adds out-of-stock products to the collection: https://magento.stackexchange.com/a/261620
 $c->setFlag('has_stock_status_filter', false);
 $c->setOrder('sku', S::SQL_ASC);
-echo df_cc_n(df_map($c, function(P $p) {
+echo df_cc_n(df_map($c, function(P $p):string {
 	$rp = !df_configurable($p) ? $p->getPrice() :
 		min(df_map(df_configurable_children($p), function(P $p) {return $p->getPrice();}))
 	; /** @var float $rp */
